@@ -1084,13 +1084,17 @@ public class WndSettings extends WndTabbed {
 				info += "This is the source language, written by the developer.";
 			else if (currLang.status() == Languages.Status.O_COMPLETE)
 				info += Messages.get(this, "completed");
-			else if (currLang.status() == Languages.Status.__UNREVIEW)
-				info += Messages.get(this, "unreviewed");
-			else if (currLang.status() == Languages.Status.X_UNFINISH)
+			else if (currLang.status() == Languages.Status.__UNREVIEW) {
+				if (currLang == Languages.CHI_SMPL) {
+					info += Messages.get(this, "unreviewed_hisashiki");
+				} else {
+					info += Messages.get(this, "unreviewed");
+				}
+			} else if (currLang.status() == Languages.Status.X_UNFINISH)
 				info += Messages.get(this, "unfinished");
 			txtLangInfo.text(info);
 
-			if (currLang.status() == Languages.Status.__UNREVIEW)
+			if (currLang.status() == Languages.Status.__UNREVIEW && currLang != Languages.CHI_SMPL)
 				txtLangInfo.setHightlighting(true, CharSprite.WARNING);
 			else if (currLang.status() == Languages.Status.X_UNFINISH)
 				txtLangInfo.setHightlighting(true, CharSprite.NEGATIVE);

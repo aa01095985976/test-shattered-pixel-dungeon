@@ -850,7 +850,7 @@ public class HeroSelectScene extends PixelScene {
 				}
 			};
 			wizardButton.leftJustify = true;
-			wizardButton.icon(Icons.get(Icons.TALENT));
+			wizardButton.icon(Icons.get(Icons.SCROLL_GREY));
 			add(wizardButton);
 			buttons.add(wizardButton);
 
