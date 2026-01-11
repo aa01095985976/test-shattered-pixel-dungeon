@@ -746,7 +746,9 @@ public class Hero extends Char {
 		speed = AscensionChallenge.modifyHeroSpeed(speed);
 
 		// Apply wizard mode move speed multiplier
-		speed *= Dungeon.wizardMoveSpeedMultiplier;
+		if (Dungeon.wizardModeEnabled) {
+			speed *= Dungeon.wizardMoveSpeedMultiplier;
+		}
 
 		return speed;
 
@@ -805,8 +807,11 @@ public class Hero extends Char {
 		float delay = 1f;
 
 		if (!RingOfForce.fightingUnarmed(this)) {
-
-			return (delay * belongings.attackingWeapon().delayFactor(this)) / Dungeon.wizardAttackSpeedMultiplier;
+			float attackDelay = delay * belongings.attackingWeapon().delayFactor(this);
+			if (Dungeon.wizardModeEnabled) {
+				attackDelay /= Dungeon.wizardAttackSpeedMultiplier;
+			}
+			return attackDelay;
 
 		} else {
 			// Normally putting furor speed on unarmed attacks would be unnecessary
@@ -825,7 +830,11 @@ public class Hero extends Char {
 				delay = ((Weapon) belongings.weapon).augment.delayFactor(delay);
 			}
 
-			return (delay / speed) / Dungeon.wizardAttackSpeedMultiplier;
+			float result = delay / speed;
+			if (Dungeon.wizardModeEnabled) {
+				result /= Dungeon.wizardAttackSpeedMultiplier;
+			}
+			return result;
 		}
 	}
 
@@ -2009,7 +2018,11 @@ public class Hero extends Char {
 
 		// xp granted by ascension challenge is only for on-exp gain effects
 		if (source != AscensionChallenge.class) {
-			this.exp += exp * Dungeon.wizardExpMultiplier;
+			int expGain = exp;
+			if (Dungeon.wizardModeEnabled) {
+				expGain *= Dungeon.wizardExpMultiplier;
+			}
+			this.exp += expGain;
 		}
 		float percent = exp / (float) maxExp();
 

@@ -4,6 +4,7 @@ import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.HeroSelectScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
+import com.shatteredpixel.shatteredpixeldungeon.ui.CheckBox;
 import com.shatteredpixel.shatteredpixeldungeon.ui.OptionSlider;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Window;
@@ -13,6 +14,7 @@ public class WndWizardMode extends Window {
     private static final int WIDTH = 120;
     private static final int TTL_HEIGHT = 16;
     private static final int SLIDER_HEIGHT = 30;
+    private static final int BTN_HEIGHT = 18;
     private static final int GAP = 2;
 
     public WndWizardMode() {
@@ -25,6 +27,32 @@ public class WndWizardMode extends Window {
         add(title);
 
         float pos = TTL_HEIGHT + GAP;
+
+        // Wizard Mode Enabled Checkbox
+        CheckBox wizardModeEnabledCB = new CheckBox(Messages.get(this, "wizard_mode_enabled")) {
+            @Override
+            protected void onClick() {
+                super.onClick();
+                SPDSettings.wizardModeEnabled(checked());
+            }
+        };
+        wizardModeEnabledCB.checked(SPDSettings.wizardModeEnabled());
+        wizardModeEnabledCB.setRect(0, pos, WIDTH, BTN_HEIGHT);
+        add(wizardModeEnabledCB);
+        pos = wizardModeEnabledCB.bottom() + GAP;
+
+        // Auto Identify Items Checkbox
+        CheckBox autoIdentifyCB = new CheckBox(Messages.get(this, "auto_identify")) {
+            @Override
+            protected void onClick() {
+                super.onClick();
+                SPDSettings.wizardAutoIdentify(checked());
+            }
+        };
+        autoIdentifyCB.checked(SPDSettings.wizardAutoIdentify());
+        autoIdentifyCB.setRect(0, pos, WIDTH, BTN_HEIGHT);
+        add(autoIdentifyCB);
+        pos = autoIdentifyCB.bottom() + GAP;
 
         // Experience Multiplier Slider
         int expCurrentVal = valToIndex(SPDSettings.wizardExpMultiplier());

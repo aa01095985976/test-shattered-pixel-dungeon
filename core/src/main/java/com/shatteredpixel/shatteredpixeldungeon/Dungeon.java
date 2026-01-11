@@ -187,6 +187,8 @@ public class Dungeon {
 	public static int wizardExpMultiplier;
 	public static int wizardMoveSpeedMultiplier;
 	public static int wizardAttackSpeedMultiplier;
+	public static boolean wizardModeEnabled;
+	public static boolean wizardAutoIdentify;
 	public static float mobsToChampion;
 
 	public static Hero hero;
@@ -247,6 +249,8 @@ public class Dungeon {
 		wizardExpMultiplier = SPDSettings.wizardExpMultiplier();
 		wizardMoveSpeedMultiplier = SPDSettings.wizardMoveSpeedMultiplier();
 		wizardAttackSpeedMultiplier = SPDSettings.wizardAttackSpeedMultiplier();
+		wizardModeEnabled = SPDSettings.wizardModeEnabled();
+		wizardAutoIdentify = SPDSettings.wizardAutoIdentify();
 		mobsToChampion = 1;
 
 		Actor.clear();
@@ -639,6 +643,8 @@ public class Dungeon {
 	private static final String WIZARD_EXP_MULT = "wizard_exp_mult";
 	private static final String WIZARD_MOVE_SPEED_MULT = "wizard_move_speed_mult";
 	private static final String WIZARD_ATTACK_SPEED_MULT = "wizard_attack_speed_mult";
+	private static final String WIZARD_MODE_ENABLED = "wizard_mode_enabled";
+	private static final String WIZARD_AUTO_IDENTIFY = "wizard_auto_identify";
 	private static final String MOBS_TO_CHAMPION = "mobs_to_champion";
 	private static final String HERO = "hero";
 	private static final String DEPTH = "depth";
@@ -669,6 +675,8 @@ public class Dungeon {
 			bundle.put(WIZARD_EXP_MULT, wizardExpMultiplier);
 			bundle.put(WIZARD_MOVE_SPEED_MULT, wizardMoveSpeedMultiplier);
 			bundle.put(WIZARD_ATTACK_SPEED_MULT, wizardAttackSpeedMultiplier);
+			bundle.put(WIZARD_MODE_ENABLED, wizardModeEnabled);
+			bundle.put(WIZARD_AUTO_IDENTIFY, wizardAutoIdentify);
 			bundle.put(MOBS_TO_CHAMPION, mobsToChampion);
 			bundle.put(HERO, hero);
 			bundle.put(DEPTH, depth);
@@ -783,6 +791,8 @@ public class Dungeon {
 		Dungeon.wizardAttackSpeedMultiplier = bundle.contains(WIZARD_ATTACK_SPEED_MULT)
 				? bundle.getInt(WIZARD_ATTACK_SPEED_MULT)
 				: 1;
+		Dungeon.wizardModeEnabled = bundle.getBoolean(WIZARD_MODE_ENABLED);
+		Dungeon.wizardAutoIdentify = bundle.getBoolean(WIZARD_AUTO_IDENTIFY);
 		Dungeon.mobsToChampion = bundle.getFloat(MOBS_TO_CHAMPION);
 
 		Dungeon.level = null;

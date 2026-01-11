@@ -502,4 +502,23 @@ public class SPDSettings extends GameSettings {
 	public static int wizardAttackSpeedMultiplier() {
 		return getInt(KEY_WIZARD_ATTACK_SPEED_MULTIPLIER, 1);
 	}
+
+	public static final String KEY_WIZARD_MODE_ENABLED = "wizard_mode_enabled";
+	public static final String KEY_WIZARD_AUTO_IDENTIFY = "wizard_auto_identify";
+
+	public static void wizardModeEnabled(boolean value) {
+		put(KEY_WIZARD_MODE_ENABLED, value);
+	}
+
+	public static boolean wizardModeEnabled() {
+		return getBoolean(KEY_WIZARD_MODE_ENABLED, false);
+	}
+
+	public static void wizardAutoIdentify(boolean value) {
+		put(KEY_WIZARD_AUTO_IDENTIFY, value);
+	}
+
+	public static boolean wizardAutoIdentify() {
+		return getBoolean(KEY_WIZARD_AUTO_IDENTIFY, false);
+	}
 }
