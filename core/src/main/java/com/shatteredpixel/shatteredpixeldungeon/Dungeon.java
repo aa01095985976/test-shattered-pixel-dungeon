@@ -185,6 +185,8 @@ public class Dungeon {
 
 	public static int challenges;
 	public static int wizardExpMultiplier;
+	public static int wizardMoveSpeedMultiplier;
+	public static int wizardAttackSpeedMultiplier;
 	public static float mobsToChampion;
 
 	public static Hero hero;
@@ -243,6 +245,8 @@ public class Dungeon {
 		initialVersion = version = Game.versionCode;
 		challenges = SPDSettings.challenges();
 		wizardExpMultiplier = SPDSettings.wizardExpMultiplier();
+		wizardMoveSpeedMultiplier = SPDSettings.wizardMoveSpeedMultiplier();
+		wizardAttackSpeedMultiplier = SPDSettings.wizardAttackSpeedMultiplier();
 		mobsToChampion = 1;
 
 		Actor.clear();
@@ -633,6 +637,8 @@ public class Dungeon {
 	private static final String LAST_PLAYED = "last_played";
 	private static final String CHALLENGES = "challenges";
 	private static final String WIZARD_EXP_MULT = "wizard_exp_mult";
+	private static final String WIZARD_MOVE_SPEED_MULT = "wizard_move_speed_mult";
+	private static final String WIZARD_ATTACK_SPEED_MULT = "wizard_attack_speed_mult";
 	private static final String MOBS_TO_CHAMPION = "mobs_to_champion";
 	private static final String HERO = "hero";
 	private static final String DEPTH = "depth";
@@ -661,6 +667,8 @@ public class Dungeon {
 			bundle.put(LAST_PLAYED, lastPlayed = Game.realTime);
 			bundle.put(CHALLENGES, challenges);
 			bundle.put(WIZARD_EXP_MULT, wizardExpMultiplier);
+			bundle.put(WIZARD_MOVE_SPEED_MULT, wizardMoveSpeedMultiplier);
+			bundle.put(WIZARD_ATTACK_SPEED_MULT, wizardAttackSpeedMultiplier);
 			bundle.put(MOBS_TO_CHAMPION, mobsToChampion);
 			bundle.put(HERO, hero);
 			bundle.put(DEPTH, depth);
@@ -769,6 +777,12 @@ public class Dungeon {
 
 		Dungeon.challenges = bundle.getInt(CHALLENGES);
 		Dungeon.wizardExpMultiplier = bundle.contains(WIZARD_EXP_MULT) ? bundle.getInt(WIZARD_EXP_MULT) : 1;
+		Dungeon.wizardMoveSpeedMultiplier = bundle.contains(WIZARD_MOVE_SPEED_MULT)
+				? bundle.getInt(WIZARD_MOVE_SPEED_MULT)
+				: 1;
+		Dungeon.wizardAttackSpeedMultiplier = bundle.contains(WIZARD_ATTACK_SPEED_MULT)
+				? bundle.getInt(WIZARD_ATTACK_SPEED_MULT)
+				: 1;
 		Dungeon.mobsToChampion = bundle.getFloat(MOBS_TO_CHAMPION);
 
 		Dungeon.level = null;

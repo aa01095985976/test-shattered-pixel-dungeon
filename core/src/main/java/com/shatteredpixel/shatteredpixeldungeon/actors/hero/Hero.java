@@ -745,6 +745,9 @@ public class Hero extends Char {
 
 		speed = AscensionChallenge.modifyHeroSpeed(speed);
 
+		// Apply wizard mode move speed multiplier
+		speed *= Dungeon.wizardMoveSpeedMultiplier;
+
 		return speed;
 
 	}
@@ -803,7 +806,7 @@ public class Hero extends Char {
 
 		if (!RingOfForce.fightingUnarmed(this)) {
 
-			return delay * belongings.attackingWeapon().delayFactor(this);
+			return (delay * belongings.attackingWeapon().delayFactor(this)) / Dungeon.wizardAttackSpeedMultiplier;
 
 		} else {
 			// Normally putting furor speed on unarmed attacks would be unnecessary
@@ -822,7 +825,7 @@ public class Hero extends Char {
 				delay = ((Weapon) belongings.weapon).augment.delayFactor(delay);
 			}
 
-			return delay / speed;
+			return (delay / speed) / Dungeon.wizardAttackSpeedMultiplier;
 		}
 	}
 

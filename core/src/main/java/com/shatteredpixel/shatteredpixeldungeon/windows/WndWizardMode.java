@@ -12,8 +12,8 @@ public class WndWizardMode extends Window {
 
     private static final int WIDTH = 120;
     private static final int TTL_HEIGHT = 16;
-
-    private OptionSlider expSlider;
+    private static final int SLIDER_HEIGHT = 30;
+    private static final int GAP = 2;
 
     public WndWizardMode() {
         super();
@@ -24,30 +24,70 @@ public class WndWizardMode extends Window {
         PixelScene.align(title);
         add(title);
 
-        int currentVal = 0;
-        int multiplier = SPDSettings.wizardExpMultiplier();
-        if (multiplier == 2)
-            currentVal = 1;
-        else if (multiplier == 4)
-            currentVal = 2;
-        else if (multiplier == 8)
-            currentVal = 3;
+        float pos = TTL_HEIGHT + GAP;
 
-        expSlider = new OptionSlider(
+        // Experience Multiplier Slider
+        int expCurrentVal = valToIndex(SPDSettings.wizardExpMultiplier());
+        OptionSlider expSlider = new OptionSlider(
                 Messages.get(this, "exp_title"),
                 "1x", "8x",
                 0, 3) {
             @Override
             protected void onChange() {
-                int val = getSelectedValue();
-                int multiplier = (int) Math.pow(2, val);
+                int multiplier = (int) Math.pow(2, getSelectedValue());
                 SPDSettings.wizardExpMultiplier(multiplier);
             }
         };
-        expSlider.setSelectedValue(currentVal);
-        expSlider.setRect(0, TTL_HEIGHT + 2, WIDTH, 30);
+        expSlider.setSelectedValue(expCurrentVal);
+        expSlider.setRect(0, pos, WIDTH, SLIDER_HEIGHT);
         add(expSlider);
+        pos = expSlider.bottom() + GAP;
 
-        resize(WIDTH, (int) expSlider.bottom());
+        // Move Speed Multiplier Slider
+        int moveCurrentVal = valToIndex(SPDSettings.wizardMoveSpeedMultiplier());
+        OptionSlider moveSlider = new OptionSlider(
+                Messages.get(this, "move_speed_title"),
+                "1x", "4x",
+                0, 2) {
+            @Override
+            protected void onChange() {
+                int multiplier = (int) Math.pow(2, getSelectedValue());
+                SPDSettings.wizardMoveSpeedMultiplier(multiplier);
+            }
+        };
+        moveSlider.setSelectedValue(moveCurrentVal);
+        moveSlider.setRect(0, pos, WIDTH, SLIDER_HEIGHT);
+        add(moveSlider);
+        pos = moveSlider.bottom() + GAP;
+
+        // Attack Speed Multiplier Slider
+        int attackCurrentVal = valToIndex(SPDSettings.wizardAttackSpeedMultiplier());
+        OptionSlider attackSlider = new OptionSlider(
+                Messages.get(this, "attack_speed_title"),
+                "1x", "4x",
+                0, 2) {
+            @Override
+            protected void onChange() {
+                int multiplier = (int) Math.pow(2, getSelectedValue());
+                SPDSettings.wizardAttackSpeedMultiplier(multiplier);
+            }
+        };
+        attackSlider.setSelectedValue(attackCurrentVal);
+        attackSlider.setRect(0, pos, WIDTH, SLIDER_HEIGHT);
+        add(attackSlider);
+        pos = attackSlider.bottom();
+
+        resize(WIDTH, (int) pos);
+    }
+
+    // Convert multiplier value (1, 2, 4, 8) to slider index (0, 1, 2, 3)
+    private int valToIndex(int val) {
+        if (val == 2)
+            return 1;
+        else if (val == 4)
+            return 2;
+        else if (val == 8)
+            return 3;
+        return 0;
     }
 }

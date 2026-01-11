@@ -476,6 +476,8 @@ public class SPDSettings extends GameSettings {
 
 	// Wizard Mode
 	public static final String KEY_WIZARD_EXP_MULTIPLIER = "wizard_exp_multiplier";
+	public static final String KEY_WIZARD_MOVE_SPEED_MULTIPLIER = "wizard_move_speed_multiplier";
+	public static final String KEY_WIZARD_ATTACK_SPEED_MULTIPLIER = "wizard_attack_speed_multiplier";
 
 	public static void wizardExpMultiplier(int value) {
 		put(KEY_WIZARD_EXP_MULTIPLIER, value);
@@ -483,5 +485,21 @@ public class SPDSettings extends GameSettings {
 
 	public static int wizardExpMultiplier() {
 		return getInt(KEY_WIZARD_EXP_MULTIPLIER, 1);
+	}
+
+	public static void wizardMoveSpeedMultiplier(int value) {
+		put(KEY_WIZARD_MOVE_SPEED_MULTIPLIER, value);
+	}
+
+	public static int wizardMoveSpeedMultiplier() {
+		return getInt(KEY_WIZARD_MOVE_SPEED_MULTIPLIER, 1);
+	}
+
+	public static void wizardAttackSpeedMultiplier(int value) {
+		put(KEY_WIZARD_ATTACK_SPEED_MULTIPLIER, value);
+	}
+
+	public static int wizardAttackSpeedMultiplier() {
+		return getInt(KEY_WIZARD_ATTACK_SPEED_MULTIPLIER, 1);
 	}
 }
