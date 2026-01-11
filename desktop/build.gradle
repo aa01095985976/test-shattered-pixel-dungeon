@@ -24,6 +24,8 @@ tasks.register('debug', JavaExec) {
     systemProperty 'Specification-Version', appVersionName + "-INDEV"
     systemProperty 'Implementation-Version', appVersionCode
 
+    jvmArgs "-Dfile.encoding=UTF-8"
+
     if (osName.contains('mac')) {
         jvmArgs '-XstartOnFirstThread'
     }
