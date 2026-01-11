@@ -473,4 +473,15 @@ public class SPDSettings extends GameSettings {
 	public static int fulLScreenMonitor() {
 		return getInt(KEY_FULLSCREEN_MONITOR, 0);
 	}
+
+	// Wizard Mode
+	public static final String KEY_WIZARD_EXP_MULTIPLIER = "wizard_exp_multiplier";
+
+	public static void wizardExpMultiplier(int value) {
+		put(KEY_WIZARD_EXP_MULTIPLIER, value);
+	}
+
+	public static int wizardExpMultiplier() {
+		return getInt(KEY_WIZARD_EXP_MULTIPLIER, 1);
+	}
 }

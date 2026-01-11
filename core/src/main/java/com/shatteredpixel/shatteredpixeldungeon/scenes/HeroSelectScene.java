@@ -51,6 +51,7 @@ import com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndTextInput;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndVictoryCongrats;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndWizardMode;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.input.PointerEvent;
 import com.watabou.noosa.Camera;
@@ -844,9 +845,7 @@ public class HeroSelectScene extends PixelScene {
 					Messages.get(HeroSelectScene.class, "wizard_mode"), 6) {
 				@Override
 				protected void onClick() {
-					// TODO: Implement difficulty selection window
-					ShatteredPixelDungeon.scene().addToFront(new WndMessage(
-							Messages.get(HeroSelectScene.class, "wizard_mode_desc")));
+					ShatteredPixelDungeon.scene().addToFront(new WndWizardMode());
 				}
 			};
 			wizardButton.leftJustify = true;
